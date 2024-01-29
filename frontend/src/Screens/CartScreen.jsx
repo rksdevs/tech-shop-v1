@@ -8,7 +8,6 @@ import {
   Form,
   Button,
   Card,
-  ListGroupItem,
 } from "react-bootstrap";
 import { FaTrash } from "react-icons/fa";
 import Message from "../Components/Message";
@@ -26,7 +25,7 @@ const CartScreen = () => {
     dispatch(removeFromCart(id));
   };
 
-  const checkOuthandler = () => {
+  const checkOutHandler = () => {
     navigate("/login?redirect=/shipping");
   };
 
@@ -100,7 +99,7 @@ const CartScreen = () => {
                 type="button"
                 className="btn-block"
                 disabled={cartItems.length === 0}
-                onClick={() => checkOuthandler()}
+                onClick={() => checkOutHandler()}
               >
                 Proceed To Checkout
               </Button>
