@@ -11,7 +11,7 @@ router.post('/', protect, addOrderItems);
 router.get('/myorders', protect, getMyOrders);
 
 //get a particular order
-router.get('/:id', protect, getOrderById); //does this need admin access 
+router.get('/:id', protect, getOrderById);
 
 //update order to paid
 router.put('/:id/pay', protect, updateOrderToPaid);
