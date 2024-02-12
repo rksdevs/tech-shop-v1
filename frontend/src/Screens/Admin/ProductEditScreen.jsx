@@ -75,7 +75,7 @@ const ProductEditScreen = () => {
     try {
       const res = await uploadProductImage(formData).unwrap();
       toast.success(res.message);
-      setImage(res.message);
+      setImage(res.image);
     } catch (error) {
       toast.error(error?.data?.message || error?.error);
     }
@@ -87,6 +87,7 @@ const ProductEditScreen = () => {
         Go Back
       </Link>
       <FormContainer>
+        <h1>Edit Product</h1>
         {loadingProductUpdate && <Loader />}
         {isLoading ? (
           <Loader />
