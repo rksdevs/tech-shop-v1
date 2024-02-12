@@ -22,6 +22,12 @@ const OrderScreen = () => {
     error,
   } = useGetOrderDetailsQuery(orderId);
 
+  const hideCardButtonStyle = `
+    .paypal-buttons-context-0 .paypal-buttons-funding-card {
+      display: none !important;
+    }
+  `;
+
   const [payOrder, { isLoading: paymentLoading }] = usePayOrderMutation();
 
   const [deliverOrder, { isLoading: loadingDeliver }] =
@@ -45,6 +51,7 @@ const OrderScreen = () => {
           value: {
             "client-id": paypal.clientId,
             currency: "USD",
+            disableFunding: "card",
           },
         });
         paypalDispatch({ type: "setLoadingStatus", value: "pending" });
@@ -108,6 +115,7 @@ const OrderScreen = () => {
     <Message variant="danger" />
   ) : (
     <>
+      {hideCardButtonStyle}
       <h2>Order: {order._id}</h2>
       <Row>
         <Col md={8}>
