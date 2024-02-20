@@ -36,17 +36,6 @@ const PaymentScreen = () => {
       <Form onSubmit={handleSubmit}>
         <Form.Group>
           <Form.Label as="legend">Select Payment Method</Form.Label>
-          {/* <Col>
-            <Form.Check
-              type="radio"
-              className="my-2"
-              label="PayPal"
-              id="PayPal"
-              name="paymentMethod"
-              value="PayPal"
-              onChange={handleChange}
-            ></Form.Check>
-          </Col> */}
           <Col>
             <Form.Check
               type="radio"
@@ -58,17 +47,6 @@ const PaymentScreen = () => {
               onChange={handleChange}
             ></Form.Check>
           </Col>
-          {/* <Col>
-            <Form.Check
-              type="radio"
-              className="my-2"
-              label="Cash on Delivery"
-              id="COD"
-              name="paymentMethod"
-              value="COD"
-              onChange={handleChange}
-            ></Form.Check>
-          </Col> */}
         </Form.Group>
 
         <Button type="submit" variant="primary">

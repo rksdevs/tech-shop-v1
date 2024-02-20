@@ -15,7 +15,6 @@ const razorpay = new Razorpay({
 //@route POST /api/orders
 //@access Private
 const addOrderItems = asyncHandler(async(req,res)=>{
-    // const { orderItems, shippingAddress, paymentMethod, itemsPrice, taxPrice, shippingPrice, totalPrice} = req.body;
     const { orderItems, shippingAddress, itemsPrice, taxPrice, shippingPrice, paymentMethod, totalPrice} = req.body;
 
     if (orderItems && orderItems.length === 0) {
@@ -75,9 +74,7 @@ const updateOrderToPaid = asyncHandler(async(req,res)=>{
     const payload = `${razorpayOrderId}|${razorpayPaymentId}`;
 
     try {
-        // Verify the payment signature using your Razorpay key secret
-        // const isValidSignature = razorpay.validateWebhookSignature(payload, razorpaySignature);
-        const expect = crypto.createHmac('sha256','YmB23PtLx8AtW3tO1u8CZOza').update(payload).digest('hex');
+        const expect = crypto.createHmac('sha256',`${process.env.RAZORPAY_TEST_SECRET}`).update(payload).digest('hex');
 
         const isValidSignature = expect === razorpaySignature;
 
@@ -86,12 +83,6 @@ const updateOrderToPaid = asyncHandler(async(req,res)=>{
             if (order) {
                 order.isPaid = true;
                 order.paidAt = Date.now();
-                // order.paypalPaymentResult = {
-                //     id: req.body.id,
-                //     status: req.body.status,
-                //     update_time: req.body.update_time,
-                //     email_address: req.body.email_address,
-                // }
                 // Save Razorpay payment details if necessary
                 order.paymentDetails = {
                     orderId: razorpayOrderId,
@@ -106,11 +97,9 @@ const updateOrderToPaid = asyncHandler(async(req,res)=>{
                 throw new Error('Order not found')
             }
         } else {
-            // Signature verification failed
             res.status(400).json({ error: 'Invalid signature' });
         }
     } catch (error) {
-        // Handle any errors that occur during signature verification
         console.error('Error verifying signature:', error);
         res.status(500);
         throw new Error('Internal server error');
