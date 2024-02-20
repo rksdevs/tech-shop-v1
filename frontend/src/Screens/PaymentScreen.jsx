@@ -9,7 +9,7 @@ import { useNavigate } from "react-router-dom";
 const PaymentScreen = () => {
   const cart = useSelector((state) => state.cart);
   const { shippingAddress } = cart;
-  const [paymentMethod, setPaymentMethod] = useState("PayPal");
+  const [paymentMethod, setPaymentMethod] = useState("RazorPay");
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -17,6 +17,10 @@ const PaymentScreen = () => {
     e.preventDefault();
     dispatch(savePaymentMethod(paymentMethod));
     navigate("/placeorder");
+  };
+
+  const handleChange = (e) => {
+    setPaymentMethod(e.target.value);
   };
 
   useEffect(() => {
@@ -32,7 +36,7 @@ const PaymentScreen = () => {
       <Form onSubmit={handleSubmit}>
         <Form.Group>
           <Form.Label as="legend">Select Payment Method</Form.Label>
-          <Col>
+          {/* <Col>
             <Form.Check
               type="radio"
               className="my-2"
@@ -40,12 +44,31 @@ const PaymentScreen = () => {
               id="PayPal"
               name="paymentMethod"
               value="PayPal"
-              checked
-              onChange={(e) => {
-                setPaymentMethod(e.target.value);
-              }}
+              onChange={handleChange}
+            ></Form.Check>
+          </Col> */}
+          <Col>
+            <Form.Check
+              type="radio"
+              className="my-2"
+              label="Razor Pay"
+              id="RazorPay"
+              name="paymentMethod"
+              value="RazorPay"
+              onChange={handleChange}
             ></Form.Check>
           </Col>
+          {/* <Col>
+            <Form.Check
+              type="radio"
+              className="my-2"
+              label="Cash on Delivery"
+              id="COD"
+              name="paymentMethod"
+              value="COD"
+              onChange={handleChange}
+            ></Form.Check>
+          </Col> */}
         </Form.Group>
 
         <Button type="submit" variant="primary">

@@ -1,5 +1,5 @@
 import {apiSlice} from './apiSlice';
-import { ORDERS_URL, PAYPAL_URL } from '../constants';
+import { ORDERS_URL, PAYPAL_URL, RAZORPAY_URL } from '../constants';
 
 const orderApiSlice = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
@@ -23,12 +23,12 @@ const orderApiSlice = apiSlice.injectEndpoints({
                 body: {...details}
             })
         }),
-        getPayPalClientId: builder.query({
-            query: () => ({
-                url: PAYPAL_URL,
-            }),
-            keepUnusedDataFor: 5,
-        }),
+        // getPayPalClientId: builder.query({
+        //     query: () => ({
+        //         url: PAYPAL_URL,
+        //     }),
+        //     keepUnusedDataFor: 5,
+        // }),
         getMyOrders: builder.query({
             query: () => ({
                 url: `${ORDERS_URL}/myorders`
@@ -46,8 +46,21 @@ const orderApiSlice = apiSlice.injectEndpoints({
                 url: `${ORDERS_URL}/${orderId}/deliver`,
                 method: 'PUT',
             })
+        }),
+        initiateRazorpayPayment: builder.mutation({
+            query: (details) => ({
+                url: `${RAZORPAY_URL}/payment`,
+                method: 'POST',
+                body: {...details}
+            })
+        }),
+        getRazorpayKey: builder.query({
+            query: () => ({
+                url:`${RAZORPAY_URL}/rzp-key` 
+            }),
+            keepUnusedDataFor: 5
         })
     })
 })
 
-export const {useCreateOrderMutation, useGetOrderDetailsQuery, usePayOrderMutation, useGetPayPalClientIdQuery, useGetMyOrdersQuery, useGetOrdersQuery, useDeliverOrderMutation} = orderApiSlice;
+export const {useCreateOrderMutation, useGetOrderDetailsQuery, usePayOrderMutation, useGetPayPalClientIdQuery, useGetMyOrdersQuery, useGetOrdersQuery, useDeliverOrderMutation, useInitiateRazorpayPaymentMutation, useGetRazorpayKeyQuery} = orderApiSlice;

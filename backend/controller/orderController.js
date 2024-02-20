@@ -1,12 +1,22 @@
-import e from 'express';
+import express from 'express';
 import asyncHandler from '../middlewares/asyncHandler.js';
 import Order from "../models/orderModel.js";
+import Razorpay from "razorpay";
+import crypto from 'crypto';
+import dotenv from 'dotenv';
+dotenv.config();
+
+const razorpay = new Razorpay({
+    key_id: `${process.env.RAZORPAY_TEST_KEY}`,
+    key_secret: `${process.env.RAZORPAY_TEST_SECRET}`
+})
 
 //@desc Create new order
 //@route POST /api/orders
 //@access Private
 const addOrderItems = asyncHandler(async(req,res)=>{
-    const { orderItems, shippingAddress, paymentMethod, itemsPrice, taxPrice, shippingPrice, totalPrice} = req.body;
+    // const { orderItems, shippingAddress, paymentMethod, itemsPrice, taxPrice, shippingPrice, totalPrice} = req.body;
+    const { orderItems, shippingAddress, itemsPrice, taxPrice, shippingPrice, paymentMethod, totalPrice} = req.body;
 
     if (orderItems && orderItems.length === 0) {
         res.status(400);
@@ -59,23 +69,51 @@ const getOrderById = asyncHandler(async(req,res)=>{
 //@route PUT /api/orders/:id/pay
 //@access Private
 const updateOrderToPaid = asyncHandler(async(req,res)=>{
-    const order = await Order.findById(req.params.id)
+    
+    const { razorpayOrderId, razorpayPaymentId, razorpaySignature } = req.body;
 
-    if (order) {
-        order.isPaid = true;
-        order.paidAt = Date.now();
-        order.paymentResult = {
-            id: req.body.id,
-            status: req.body.status,
-            update_time: req.body.update_time,
-            email_address: req.body.email_address,
+    const payload = `${razorpayOrderId}|${razorpayPaymentId}`;
+
+    try {
+        // Verify the payment signature using your Razorpay key secret
+        // const isValidSignature = razorpay.validateWebhookSignature(payload, razorpaySignature);
+        const expect = crypto.createHmac('sha256','YmB23PtLx8AtW3tO1u8CZOza').update(payload).digest('hex');
+
+        const isValidSignature = expect === razorpaySignature;
+
+        if(isValidSignature) {
+            const order = await Order.findById(req.params.id)
+            if (order) {
+                order.isPaid = true;
+                order.paidAt = Date.now();
+                // order.paypalPaymentResult = {
+                //     id: req.body.id,
+                //     status: req.body.status,
+                //     update_time: req.body.update_time,
+                //     email_address: req.body.email_address,
+                // }
+                // Save Razorpay payment details if necessary
+                order.paymentDetails = {
+                    orderId: razorpayOrderId,
+                    paymentId: razorpayPaymentId,
+                    signature: razorpaySignature
+                };
+        
+                const updatedOrder = await order.save();
+                res.status(200).json(updatedOrder)
+            } else {
+                res.status(404);
+                throw new Error('Order not found')
+            }
+        } else {
+            // Signature verification failed
+            res.status(400).json({ error: 'Invalid signature' });
         }
-
-        const updatedOrder = await order.save();
-        res.status(200).json(updatedOrder)
-    } else {
-        res.status(404);
-        throw new Error('Order not found')
+    } catch (error) {
+        // Handle any errors that occur during signature verification
+        console.error('Error verifying signature:', error);
+        res.status(500);
+        throw new Error('Internal server error');
     }
 })
 

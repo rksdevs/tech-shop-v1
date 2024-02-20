@@ -47,11 +47,22 @@ const orderSchema = new mongoose.Schema ({
         type: String,
         required: true,
     },
-    paymentResult: {
-        id:{type:String},
-        status: {type:String},
-        update_time: {type:String},
-        email_address: {type:String}
+    // paypalPaymentResult: {
+    //     id:{type:String},
+    //     status: {type:String},
+    //     update_time: {type:String},
+    //     email_address: {type:String}
+    // },
+    paymentDetails: {
+        orderId: {
+            type: String
+        },
+        paymentId: {
+            type: String
+        },
+        signature: {
+            type: String
+        }
     },
     itemsPrice: {
         type: Number,
