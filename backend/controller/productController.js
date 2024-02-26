@@ -38,6 +38,7 @@ const createProduct = asyncHandler(async(req,res)=>{
         user: req.user._id,
         brand: 'Sample Brand',
         category: 'Sample Category',
+        modelNumber: 'Sample Model Number',
         image: '/images/sample.jpg',
         countInStock: 0,
         numReviews: 0,
@@ -52,7 +53,7 @@ const createProduct = asyncHandler(async(req,res)=>{
 //@route  PUT /api/products/:id
 //@access Private/Admin
 const updateProduct = asyncHandler(async(req,res)=>{
-    const {name, price, brand, category, image, countInStock, description} = req.body;
+    const {name, price, brand, category, modelNumber, image, countInStock, description} = req.body;
 
     const product = await Product.findById(req.params.id);
 
@@ -61,6 +62,7 @@ const updateProduct = asyncHandler(async(req,res)=>{
         product.price = price;
         product.brand = brand;
         product.category = category;
+        product.modelNumber = modelNumber;
         product.image = image;
         product.countInStock = countInStock;
         product.description = description;
@@ -88,4 +90,18 @@ const deleteProduct = asyncHandler(async(req,res)=>{
     }
 })
 
-export {getAllProducts, getProductById, createProduct, updateProduct, deleteProduct}
+//@desc Fetch all products by category
+//@route GET /api/products/:category
+//@access Public
+const getProductsByCategory = asyncHandler(async(req,res)=>{
+    const categoryToSearch = req.params.category;
+    const product = await Product.find({category: categoryToSearch})
+    if(product.length > 0) {
+        res.status(200).json(product);
+    } else {
+        res.status(404);
+        throw new Error("Category not found! Here is a pancake..")
+    }
+})
+
+export {getAllProducts, getProductById, createProduct, updateProduct, deleteProduct, getProductsByCategory}

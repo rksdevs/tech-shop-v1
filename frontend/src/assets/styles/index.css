@@ -56,3 +56,17 @@ table th {
   height: 180px;
   width: 220px;
 }
+
+.build-pc-cell-data {
+  padding: 8px !important;
+}
+
+.product-image-from-builder {
+  height: 50px;
+  /* width: 50px; */
+  margin: revert;
+}
+
+.product-details-from-builder {
+  margin: revert;
+}

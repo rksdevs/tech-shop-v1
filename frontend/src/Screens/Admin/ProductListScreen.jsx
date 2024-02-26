@@ -66,6 +66,7 @@ const ProductListScreen = () => {
               <tr>
                 <th>ID</th>
                 <th>Name</th>
+                <th>Model Number</th>
                 <th>Price</th>
                 <th>Category</th>
                 <th>Brand</th>
@@ -77,6 +78,7 @@ const ProductListScreen = () => {
                 <tr key={product._id}>
                   <td>{product._id}</td>
                   <td>{product.name}</td>
+                  <td>{product.modelNumber}</td>
                   <td>₹{product.price}</td>
                   <td>{product.category}</td>
                   <td>{product.brand}</td>

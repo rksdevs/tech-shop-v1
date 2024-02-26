@@ -25,6 +25,7 @@ import ProductListScreen from './Screens/Admin/ProductListScreen';
 import ProductEditScreen from './Screens/Admin/ProductEditScreen';
 import UserListScreen from './Screens/Admin/UsersListScreen';
 import UserEditScreen from './Screens/Admin/UserEditScreen';
+import BuildOwnPc from './Screens/BuildOwnPc';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -41,6 +42,7 @@ const router = createBrowserRouter(
         <Route path='/placeorder' element={<PlaceOrderScreen />} />
         <Route path='/order/:id' element={<OrderScreen />} />
         <Route path='/profile' element={<ProfileScreen />} />
+        <Route path='/buildmypc' element={<BuildOwnPc />} />
       </Route>
 
       <Route path='' element={<AdminRoutes />}>

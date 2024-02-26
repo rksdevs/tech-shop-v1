@@ -18,6 +18,7 @@ const ProductEditScreen = () => {
   const [brand, setBrand] = useState("");
   const [image, setImage] = useState("");
   const [category, setCategory] = useState("");
+  const [modelNumber, setModelNumber] = useState("");
   const [countInStock, setCountInStock] = useState(0);
   const [description, setDescription] = useState("");
 
@@ -42,6 +43,7 @@ const ProductEditScreen = () => {
       setPrice(product.price);
       setBrand(product.brand);
       setCategory(product.category);
+      setModelNumber(product.modelNumber);
       setImage(product.image);
       setCountInStock(product.countInStock);
       setDescription(product.description);
@@ -58,6 +60,7 @@ const ProductEditScreen = () => {
         image,
         brand,
         category,
+        modelNumber,
         description,
         countInStock,
       }).unwrap(); // NOTE: here we need to unwrap the Promise to catch any rejection in our catch block
@@ -166,6 +169,17 @@ const ProductEditScreen = () => {
                 value={category}
                 onChange={(e) => {
                   setCategory(e.target.value);
+                }}
+              ></Form.Control>
+            </Form.Group>
+            <Form.Group controlId="modelNumber" className="my-2">
+              <Form.Label>Model Number</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Enter Model Number"
+                value={modelNumber}
+                onChange={(e) => {
+                  setModelNumber(e.target.value);
                 }}
               ></Form.Control>
             </Form.Group>
