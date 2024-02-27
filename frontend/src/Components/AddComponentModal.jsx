@@ -2,35 +2,43 @@ import Modal from "@mui/material/Modal";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import { useState, useEffect } from "react";
-import { useGetProductsByCategoryQuery } from "../slices/productApiSlice";
+import {
+  useGetProductsByCategoryQuery,
+  useGetProductDetailsQuery,
+} from "../slices/productApiSlice";
 import { Table, Button, Row, Col, Card } from "react-bootstrap";
 import { FaEdit, FaTrash } from "react-icons/fa";
 import Loader from "./Loader";
 import Message from "./Message";
+import { useSelector, useDispatch } from "react-redux";
+import AddSpecificPartModal from "./AddSpecificPartModal";
 
 const AddComponentModal = ({ openModal, closeModal, category }) => {
+  const [productId, setProductId] = useState("");
+  const [open2ndModal, setOpen2ndModal] = useState(false);
   const {
     data: products,
     isLoading,
     error,
   } = useGetProductsByCategoryQuery(category);
+
   const style = {
     position: "absolute",
     top: "50%",
     left: "50%",
     transform: "translate(-50%, -50%)",
-    minWidth: 700,
+    minWidth: 900,
     bgcolor: "background.paper",
     border: "2px solid #000",
     boxShadow: 24,
     p: 4,
   };
 
-  useEffect(() => {
-    if (products) {
-      console.log(products);
-    }
-  }, [products]);
+  // useEffect(() => {
+  //   if (products) {
+  //     console.log(products);
+  //   }
+  // }, [products]);
 
   return (
     <>
@@ -49,7 +57,6 @@ const AddComponentModal = ({ openModal, closeModal, category }) => {
           >
             Choose a {category}
           </Typography>
-          {/* <Typography id="modal-modal-description" sx={{ mt: 2 }}> */}
           {isLoading ? (
             <Loader />
           ) : error ? (
@@ -93,13 +100,7 @@ const AddComponentModal = ({ openModal, closeModal, category }) => {
                     </td>
                     <td>
                       <p className="product-details-from-builder">
-                        <Button
-                          variant="primary"
-                          className="btn-sm"
-                          //   onClick={() => deleteHandler(product._id)}
-                        >
-                          Add {category}
-                        </Button>
+                        <AddSpecificPartModal productId={product._id} />
                       </p>
                     </td>
                   </tr>
@@ -107,7 +108,6 @@ const AddComponentModal = ({ openModal, closeModal, category }) => {
               </tbody>
             </Table>
           )}
-          {/* </Typography> */}
         </Box>
       </Modal>
     </>
