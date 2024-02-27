@@ -28,6 +28,7 @@ const ProductScreen = () => {
   } = useGetProductDetailsQuery(productId);
 
   const addToCartHandler = () => {
+    console.log({ ...product, qty });
     dispatch(addToCart({ ...product, qty }));
     navigate("/cart");
   };

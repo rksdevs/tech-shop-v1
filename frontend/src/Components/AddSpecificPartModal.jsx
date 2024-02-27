@@ -42,8 +42,6 @@ const AddSpecificPartModal = ({ productId }) => {
   const [open, setOpen] = useState(false);
   const [qty, setQty] = useState(1);
   const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const { customPc } = useSelector((state) => state.customPc);
 
   const {
     data: product,

@@ -16,6 +16,7 @@ import {
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { FaEdit, FaTrash } from "react-icons/fa";
+import { addToCart } from "../slices/cartSlice";
 
 const BuildOwnPc = () => {
   const {
@@ -35,6 +36,7 @@ const BuildOwnPc = () => {
     keyboard,
     totalBuildPrice,
   } = useSelector((state) => state.customPc);
+  const customPcItems = useSelector((state) => state.customPc);
   const dispatch = useDispatch();
 
   const [category, setCategory] = useState("");
@@ -53,6 +55,14 @@ const BuildOwnPc = () => {
     setCategory(category);
     setIsAddProductModalOpen(true);
     setOpen(true);
+  };
+
+  const handleAddAllToCart = () => {
+    let customBuildItems = Object.values(customPcItems);
+    customBuildItems.pop();
+    customBuildItems.forEach((item) => {
+      dispatch(addToCart({ ...item }));
+    });
   };
 
   useEffect(() => {
@@ -744,8 +754,12 @@ const BuildOwnPc = () => {
                 </Row>
               </ListGroup.Item>
               <ListGroup.Item>
-                <Button type="button" className="btn-block">
-                  Add to cart
+                <Button
+                  type="button"
+                  className="btn-block"
+                  onClick={handleAddAllToCart}
+                >
+                  Add all cart
                 </Button>
               </ListGroup.Item>
             </ListGroup>
