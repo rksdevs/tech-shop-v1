@@ -1,21 +1,14 @@
 import Modal from "@mui/material/Modal";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import { useState, useEffect } from "react";
-import {
-  useGetProductsByCategoryQuery,
-  useGetProductDetailsQuery,
-} from "../slices/productApiSlice";
+import { useGetProductsByCategoryQuery } from "../slices/productApiSlice";
 import { Table, Button, Row, Col, Card } from "react-bootstrap";
 import { FaEdit, FaTrash } from "react-icons/fa";
 import Loader from "./Loader";
 import Message from "./Message";
-import { useSelector, useDispatch } from "react-redux";
 import AddSpecificPartModal from "./AddSpecificPartModal";
 
 const AddComponentModal = ({ openModal, closeModal, category }) => {
-  const [productId, setProductId] = useState("");
-  const [open2ndModal, setOpen2ndModal] = useState(false);
   const {
     data: products,
     isLoading,
@@ -33,12 +26,6 @@ const AddComponentModal = ({ openModal, closeModal, category }) => {
     boxShadow: 24,
     p: 4,
   };
-
-  // useEffect(() => {
-  //   if (products) {
-  //     console.log(products);
-  //   }
-  // }, [products]);
 
   return (
     <>
