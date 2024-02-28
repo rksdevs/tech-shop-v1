@@ -1,6 +1,7 @@
 **E-Commerce Website Specialy Tailored For Computer Needs**
 **Stack & Library Details**
-*Stack* - Javascript is the heart and brain of this project - built using MERN stack - MongoDb, Express Js, React Js (functional components), Node Js.
+*Stack* - 
+ Javascript is the heart and brain of this project - built using MERN stack - MongoDb, Express Js, React Js (functional components), Node Js.
 *Libraries* - 
   1. Frontend UI - React-bootstrap Mainly - Will be migrating to Material UI for improved features
   2. Backend - Mongoose, Express Js, JWT, crypto, multer, cookie-parser, razorpay
