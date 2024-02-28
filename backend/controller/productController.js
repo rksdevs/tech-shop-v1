@@ -104,4 +104,23 @@ const getProductsByCategory = asyncHandler(async(req,res)=>{
     }
 })
 
-export {getAllProducts, getProductById, createProduct, updateProduct, deleteProduct, getProductsByCategory}
+//@desc   Update a product
+//@route  POST /api/products/updateProductStock
+//@access Private
+const updateProductStock = asyncHandler(async(req,res)=>{
+    const order = req.body;
+    for (const orderItem of order.orderItems) {
+        const product = await Product.findById(orderItem.product);
+        if (product) {
+            product.countInStock -= orderItem.qty;
+            await product.save();
+        } else {
+            res.status(404);
+            throw new Error(`Product with ID ${orderItem.product} not found`);
+        }
+    }
+
+    res.json({ message: 'Stock updated successfully' });
+})
+
+export {getAllProducts, getProductById, createProduct, updateProduct, deleteProduct, getProductsByCategory, updateProductStock}

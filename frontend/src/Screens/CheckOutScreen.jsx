@@ -15,7 +15,7 @@ import {
 import Loader from "../Components/Loader";
 import { toast } from "react-toastify";
 
-const OrderScreen = () => {
+const CheckOutScreen = () => {
   const { id: orderId } = useParams();
   const {
     data: order,
@@ -278,4 +278,4 @@ const OrderScreen = () => {
   );
 };
 
-export default OrderScreen;
+export default CheckOutScreen;

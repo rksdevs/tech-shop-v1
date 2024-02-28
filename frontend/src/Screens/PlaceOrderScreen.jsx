@@ -8,6 +8,7 @@ import Message from "../Components/Message";
 import { useCreateOrderMutation } from "../slices/orderApiSlice";
 import { clearCart } from "../slices/cartSlice";
 import Loader from "../Components/Loader";
+import { useUpdateProductStockMutation } from "../slices/productApiSlice";
 
 const PlaceOrderScreen = () => {
   const navigate = useNavigate();
@@ -15,6 +16,7 @@ const PlaceOrderScreen = () => {
   const cart = useSelector((state) => state.cart);
 
   const [createOrder, { isLoading, error }] = useCreateOrderMutation();
+  const [updateProductStock] = useUpdateProductStockMutation();
 
   useEffect(() => {
     if (!cart.shippingAddress.address) {
@@ -37,6 +39,7 @@ const PlaceOrderScreen = () => {
       }).unwrap();
       dispatch(clearCart());
       navigate(`/order/${res._id}`);
+      dispatch(updateProductStock(res));
     } catch (error) {
       toast.error(error);
     }

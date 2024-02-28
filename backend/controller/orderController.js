@@ -1,6 +1,7 @@
 import express from 'express';
 import asyncHandler from '../middlewares/asyncHandler.js';
 import Order from "../models/orderModel.js";
+import Product from '../models/productModel.js';
 import Razorpay from "razorpay";
 import crypto from 'crypto';
 import dotenv from 'dotenv';
@@ -132,5 +133,6 @@ const getAllOrders = asyncHandler(async(req,res)=>{
     const orders = await Order.find({}).populate('user', 'id name')
     res.status(200).json(orders); 
 })
+
 
 export {addOrderItems, getMyOrders, getOrderById, updateOrderToPaid, updateOrderToDelivered, getAllOrders}
