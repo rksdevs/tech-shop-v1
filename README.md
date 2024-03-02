@@ -1,7 +1,11 @@
 **E-Commerce Website Specialy Tailored For Computer Needs**
+
 **Stack & Library Details**
+
 *Stack* - 
+ 
  Javascript is the heart and brain of this project - built using MERN stack - MongoDb, Express Js, React Js (functional components), Node Js.
+
 *Libraries* - 
   1. Frontend UI - React-bootstrap Mainly - Will be migrating to Material UI for improved features
   2. Backend - Mongoose, Express Js, JWT, crypto, multer, cookie-parser, razorpay
@@ -25,7 +29,7 @@
 7. Custom PC Building Feature -- Configure own pc parts, select from available items, delete, edit items from the list, add all to cart -- **Completed**
 8. Nav bar with Category selection, pages with category wise products to display -- **Pending**
 9. Sorting, Filtering, Searching Products on Products page, on Custom PC Building Page -- **Pending**
-10. Update Stock on Order Placement/Order Payment -- **Pending -- Important**
+10. Update Stock on Order Placement/Order Payment -- ~~**Pending -- Important**~~ **Completed**
 11. UI/UX improvements - Update theme, migrate from react-bootstrap to material-ui, page wise improvements -- **Pending**
 12. Code refractoring - Check and apply DRY principles, check for memory leaks, apply memoization where needed -- **Pending**
 13. Write Unit Test -- **Pending** 
