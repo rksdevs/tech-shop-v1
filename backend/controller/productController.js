@@ -123,4 +123,45 @@ const updateProductStock = asyncHandler(async(req,res)=>{
     res.json({ message: 'Stock updated successfully' });
 })
 
-export {getAllProducts, getProductById, createProduct, updateProduct, deleteProduct, getProductsByCategory, updateProductStock}
+//@desc   Create product review
+//@route  POST /api/products/:id/reviews
+//@access Private
+const createProductReview = asyncHandler(async(req,res)=>{
+    const {rating, comment} = req.body;
+    const productId = req.params.id;
+
+    const product = await Product.findById(productId);
+
+    if (product) {
+        //check if the user already has a review on the product
+        const alreadyReviewed = product.reviews.find((review) => review.user.toString() === req.user._id.toString());
+
+        if(alreadyReviewed) {
+            res.status(404);
+            throw new Error(`You have already reviewed this product`);  
+        }
+
+        const review = {
+            name: req.user.name,
+            rating: Number(rating),
+            comment,
+            user: req.user._id
+        }
+
+        product.reviews.push(review);
+        product.numReviews = product.reviews.length;
+
+        product.rating = product.reviews.reduce((acc, review) => acc + review.rating, 0) / product.reviews.length;
+        
+        await product.save();
+
+        res.status(201).json({message: "Review added"})
+
+    } else {
+        res.status(404);
+        throw new Error(`Product with ID ${orderItem.product} not found`);
+    }
+
+})
+
+export {getAllProducts, getProductById, createProduct, updateProduct, deleteProduct, getProductsByCategory, updateProductStock, createProductReview}
