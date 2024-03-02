@@ -5,9 +5,12 @@ import Product from "../models/productModel.js";
 //@route GET /api/products
 //@access Public
 const getAllProducts = asyncHandler(async(req,res)=>{
-    const products = await Product.find({});
+    const pageSize = 8;
+    const page = Number(req.query.pageNumber) || 1;
+    const count = await Product.countDocuments();
+    const products = await Product.find({}).limit(pageSize).skip(pageSize * (page -1));
     if (products) {
-        return res.json(products)
+        return res.json({products, page, pages: Math.ceil(count/pageSize)})
     } else {
         res.status(404);
         throw new Error ('Resources not found! Here is a pancakce..')
