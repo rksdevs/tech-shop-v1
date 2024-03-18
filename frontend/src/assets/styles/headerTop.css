@@ -1,0 +1,42 @@
+.navbar-top {
+    background: #FCF5ED;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    font-size: .75em;
+    color: #000;
+
+    .container {
+        padding-right: 0;
+    }
+
+    .header-row-1 {
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+
+        .row-1-cols{
+            span {
+                color: #000;
+            }
+        }
+
+        .row-1-cols-user {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            padding-right: 0;
+            .header-username {
+                margin-left: 0.5em;
+            }
+
+            span {
+                color: #000;
+            }
+
+            .sign-in-btn {
+                margin-left: 0.5em;
+            }
+        }
+    }
+}
+

@@ -2,17 +2,18 @@ import React from "react";
 import { Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import Ratings from "./Ratings";
+import "../assets/styles/productCard.css";
 
 const Product = ({ product }) => {
   return (
-    <Card className="my-3 p-3 rounded">
+    <Card className="my-3 p-3 rounded product-card-home">
       <Link to={`/product/${product._id}`}>
         <Card.Img src={product.image} variant="top" className="product-card" />
       </Link>
       <Card.Body>
         <Link to={`/product/${product._id}`}>
           <Card.Title as="div" className="product-title">
-            <strong>{product.name}</strong>
+            <strong className="p-name">{product.name}</strong>
           </Card.Title>
         </Link>
       </Card.Body>

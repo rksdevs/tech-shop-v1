@@ -7,6 +7,11 @@ import { FaEdit, FaTrash } from "react-icons/fa";
 import Loader from "./Loader";
 import Message from "./Message";
 import AddSpecificPartModal from "./AddSpecificPartModal";
+import { TableBody, TableCell } from "@mui/material";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
+import Paper from "@mui/material/Paper";
 
 const AddComponentModal = ({ openModal, closeModal, category }) => {
   const {
@@ -49,51 +54,51 @@ const AddComponentModal = ({ openModal, closeModal, category }) => {
           ) : error ? (
             <Message variant="danger">{error}</Message>
           ) : (
-            <Table striped hover responsive bordered className="table-sm">
-              <thead>
-                <tr>
-                  <th>Image</th>
-                  <th>Name</th>
-                  <th>Model Number</th>
-                  <th>Price</th>
-                  <th>Actions</th>
-                </tr>
-              </thead>
-              <tbody>
+            <TableContainer component={Paper}>
+              <TableHead>
+                <TableRow>
+                  <TableCell>Image</TableCell>
+                  <TableCell>Name</TableCell>
+                  <TableCell>Model Number</TableCell>
+                  <TableCell>Price</TableCell>
+                  <TableCell>Actions</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
                 {products.map((product) => (
-                  <tr key={product._id}>
-                    <td>
+                  <TableRow key={product._id}>
+                    <TableCell>
                       <Card>
                         <Card.Img
                           src={product.image}
                           className="product-image-from-builder"
                         />
                       </Card>
-                    </td>
-                    <td>
+                    </TableCell>
+                    <TableCell>
                       <p className="product-details-from-builder">
                         {product.name}
                       </p>
-                    </td>
-                    <td>
+                    </TableCell>
+                    <TableCell>
                       <p className="product-details-from-builder">
                         {product.modelNumber}
                       </p>
-                    </td>
-                    <td>
+                    </TableCell>
+                    <TableCell>
                       <p className="product-details-from-builder">
                         ₹{product.price}
                       </p>
-                    </td>
-                    <td>
+                    </TableCell>
+                    <TableCell>
                       <p className="product-details-from-builder">
                         <AddSpecificPartModal productId={product._id} />
                       </p>
-                    </td>
-                  </tr>
+                    </TableCell>
+                  </TableRow>
                 ))}
-              </tbody>
-            </Table>
+              </TableBody>
+            </TableContainer>
           )}
         </Box>
       </Modal>

@@ -25,13 +25,14 @@ import {
 // import { makeStyles } from "@mui/material";
 // import { makeStyles } from "@mui/material";
 import styled from "@emotion/styled";
+import { ThemeOptions } from "@mui/material/styles";
 
-const NewTableCell = styled(TableCell)`
-  &.MuiTableCell-root {
-    border: 1px solid #000;
-    font-weight: bold;
-  }
-`;
+// const TableCell = styled(TableCell)`
+//   &.MuiTableCell-root {
+//     border: 1px solid #000;
+//     font-weight: bold;
+//   }
+// `;
 
 const BuildOwnPc = () => {
   // const classes = useStyles();
@@ -122,46 +123,38 @@ const BuildOwnPc = () => {
             <Table aria-label="Build your pc">
               <TableHead>
                 <TableRow>
-                  <NewTableCell className="build-pc-cell-data">
+                  <TableCell className="build-pc-cell-data">
                     Component
-                  </NewTableCell>
-                  <NewTableCell className="build-pc-cell-data">
+                  </TableCell>
+                  <TableCell className="build-pc-cell-data">
                     Product Name
-                  </NewTableCell>
-                  <NewTableCell className="build-pc-cell-data">
-                    Model
-                  </NewTableCell>
-                  <NewTableCell className="build-pc-cell-data">
+                  </TableCell>
+                  <TableCell className="build-pc-cell-data">Model</TableCell>
+                  <TableCell className="build-pc-cell-data">
                     Unit Price
-                  </NewTableCell>
-                  <NewTableCell className="build-pc-cell-data">
-                    Quantity
-                  </NewTableCell>
-                  <NewTableCell className="build-pc-cell-data">
-                    Actions
-                  </NewTableCell>
+                  </TableCell>
+                  <TableCell className="build-pc-cell-data">Quantity</TableCell>
+                  <TableCell className="build-pc-cell-data">Actions</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
                 <TableRow>
-                  <NewTableCell className="build-pc-cell-data">
-                    CPU
-                  </NewTableCell>
+                  <TableCell className="build-pc-cell-data">CPU</TableCell>
                   {cpu.name ? (
                     <>
-                      <NewTableCell className="build-pc-cell-data">
+                      <TableCell className="build-pc-cell-data">
                         {cpu?.name}
-                      </NewTableCell>
-                      <NewTableCell className="build-pc-cell-data">
+                      </TableCell>
+                      <TableCell className="build-pc-cell-data">
                         {cpu?.modelNumber}
-                      </NewTableCell>
-                      <NewTableCell className="build-pc-cell-data">
+                      </TableCell>
+                      <TableCell className="build-pc-cell-data">
                         ₹{cpu?.price}
-                      </NewTableCell>
-                      <NewTableCell className="build-pc-cell-data">
+                      </TableCell>
+                      <TableCell className="build-pc-cell-data">
                         {cpu?.qty}
-                      </NewTableCell>
-                      <NewTableCell className="build-pc-cell-data">
+                      </TableCell>
+                      <TableCell className="build-pc-cell-data">
                         <Button
                           className="btn-sm"
                           onClick={() => handleOpen("CPU")}
@@ -174,12 +167,12 @@ const BuildOwnPc = () => {
                         >
                           <FaTrash />
                         </Button>
-                      </NewTableCell>
+                      </TableCell>
                     </>
                   ) : (
                     <>
-                      <NewTableCell colSpan={4}>Add a Processor</NewTableCell>
-                      <NewTableCell
+                      <TableCell colSpan={4}>Add a Processor</TableCell>
+                      <TableCell
                         className="build-pc-cell-data"
                         data-category="CPU"
                       >
@@ -192,29 +185,29 @@ const BuildOwnPc = () => {
                         >
                           Add +
                         </Button>
-                      </NewTableCell>
+                      </TableCell>
                     </>
                   )}
                 </TableRow>
                 <TableRow>
-                  <NewTableCell className="build-pc-cell-data">
+                  <TableCell className="build-pc-cell-data">
                     Cooling System
-                  </NewTableCell>
+                  </TableCell>
                   {coolingSystem.name ? (
                     <>
-                      <NewTableCell className="build-pc-cell-data">
+                      <TableCell className="build-pc-cell-data">
                         {coolingSystem?.name}
-                      </NewTableCell>
-                      <NewTableCell className="build-pc-cell-data">
+                      </TableCell>
+                      <TableCell className="build-pc-cell-data">
                         {coolingSystem?.modelNumber}
-                      </NewTableCell>
-                      <NewTableCell className="build-pc-cell-data">
+                      </TableCell>
+                      <TableCell className="build-pc-cell-data">
                         ₹{coolingSystem?.price}
-                      </NewTableCell>
-                      <NewTableCell className="build-pc-cell-data">
+                      </TableCell>
+                      <TableCell className="build-pc-cell-data">
                         {coolingSystem?.qty}
-                      </NewTableCell>
-                      <NewTableCell className="build-pc-cell-data">
+                      </TableCell>
+                      <TableCell className="build-pc-cell-data">
                         <Button
                           className="btn-sm"
                           onClick={() => {
@@ -229,14 +222,12 @@ const BuildOwnPc = () => {
                         >
                           <FaTrash />
                         </Button>
-                      </NewTableCell>
+                      </TableCell>
                     </>
                   ) : (
                     <>
-                      <NewTableCell colSpan={4}>
-                        Add a Cooling System
-                      </NewTableCell>
-                      <NewTableCell className="build-pc-cell-data">
+                      <TableCell colSpan={4}>Add a Cooling System</TableCell>
+                      <TableCell className="build-pc-cell-data">
                         <Button
                           className="btn-block"
                           size="sm"
@@ -246,29 +237,29 @@ const BuildOwnPc = () => {
                         >
                           Add +
                         </Button>
-                      </NewTableCell>
+                      </TableCell>
                     </>
                   )}
                 </TableRow>
                 <TableRow>
-                  <NewTableCell className="build-pc-cell-data">
+                  <TableCell className="build-pc-cell-data">
                     Motherboard
-                  </NewTableCell>
+                  </TableCell>
                   {motherboard.name ? (
                     <>
-                      <NewTableCell className="build-pc-cell-data">
+                      <TableCell className="build-pc-cell-data">
                         {motherboard?.name}
-                      </NewTableCell>
-                      <NewTableCell className="build-pc-cell-data">
+                      </TableCell>
+                      <TableCell className="build-pc-cell-data">
                         {motherboard?.modelNumber}
-                      </NewTableCell>
-                      <NewTableCell className="build-pc-cell-data">
+                      </TableCell>
+                      <TableCell className="build-pc-cell-data">
                         ₹{motherboard?.price}
-                      </NewTableCell>
-                      <NewTableCell className="build-pc-cell-data">
+                      </TableCell>
+                      <TableCell className="build-pc-cell-data">
                         {motherboard?.qty}
-                      </NewTableCell>
-                      <NewTableCell className="build-pc-cell-data">
+                      </TableCell>
+                      <TableCell className="build-pc-cell-data">
                         <Button
                           className="btn-sm"
                           onClick={() => {
@@ -283,12 +274,12 @@ const BuildOwnPc = () => {
                         >
                           <FaTrash />
                         </Button>
-                      </NewTableCell>
+                      </TableCell>
                     </>
                   ) : (
                     <>
-                      <NewTableCell colSpan={4}>Add a Motherboard</NewTableCell>
-                      <NewTableCell className="build-pc-cell-data">
+                      <TableCell colSpan={4}>Add a Motherboard</TableCell>
+                      <TableCell className="build-pc-cell-data">
                         <Button
                           className="btn-block"
                           size="sm"
@@ -298,29 +289,29 @@ const BuildOwnPc = () => {
                         >
                           Add +
                         </Button>
-                      </NewTableCell>
+                      </TableCell>
                     </>
                   )}
                 </TableRow>
                 <TableRow>
-                  <NewTableCell className="build-pc-cell-data">
+                  <TableCell className="build-pc-cell-data">
                     Memory/RAM
-                  </NewTableCell>
+                  </TableCell>
                   {ram.name ? (
                     <>
-                      <NewTableCell className="build-pc-cell-data">
+                      <TableCell className="build-pc-cell-data">
                         {ram?.name}
-                      </NewTableCell>
-                      <NewTableCell className="build-pc-cell-data">
+                      </TableCell>
+                      <TableCell className="build-pc-cell-data">
                         {ram?.modelNumber}
-                      </NewTableCell>
-                      <NewTableCell className="build-pc-cell-data">
+                      </TableCell>
+                      <TableCell className="build-pc-cell-data">
                         ₹{ram?.price}
-                      </NewTableCell>
-                      <NewTableCell className="build-pc-cell-data">
+                      </TableCell>
+                      <TableCell className="build-pc-cell-data">
                         {ram?.qty}
-                      </NewTableCell>
-                      <NewTableCell className="build-pc-cell-data">
+                      </TableCell>
+                      <TableCell className="build-pc-cell-data">
                         <Button
                           className="btn-sm"
                           onClick={() => {
@@ -335,12 +326,12 @@ const BuildOwnPc = () => {
                         >
                           <FaTrash />
                         </Button>
-                      </NewTableCell>
+                      </TableCell>
                     </>
                   ) : (
                     <>
-                      <NewTableCell colSpan={4}>Add a Memory/RAM</NewTableCell>
-                      <NewTableCell className="build-pc-cell-data">
+                      <TableCell colSpan={4}>Add a Memory/RAM</TableCell>
+                      <TableCell className="build-pc-cell-data">
                         <Button
                           className="btn-block"
                           size="sm"
@@ -350,29 +341,29 @@ const BuildOwnPc = () => {
                         >
                           Add +
                         </Button>
-                      </NewTableCell>
+                      </TableCell>
                     </>
                   )}
                 </TableRow>
                 <TableRow>
-                  <NewTableCell className="build-pc-cell-data">
+                  <TableCell className="build-pc-cell-data">
                     Solid State Drive
-                  </NewTableCell>
+                  </TableCell>
                   {ssd.name ? (
                     <>
-                      <NewTableCell className="build-pc-cell-data">
+                      <TableCell className="build-pc-cell-data">
                         {ssd?.name}
-                      </NewTableCell>
-                      <NewTableCell className="build-pc-cell-data">
+                      </TableCell>
+                      <TableCell className="build-pc-cell-data">
                         {ssd?.modelNumber}
-                      </NewTableCell>
-                      <NewTableCell className="build-pc-cell-data">
+                      </TableCell>
+                      <TableCell className="build-pc-cell-data">
                         ₹{ssd?.price}
-                      </NewTableCell>
-                      <NewTableCell className="build-pc-cell-data">
+                      </TableCell>
+                      <TableCell className="build-pc-cell-data">
                         {ssd?.qty}
-                      </NewTableCell>
-                      <NewTableCell className="build-pc-cell-data">
+                      </TableCell>
+                      <TableCell className="build-pc-cell-data">
                         <Button
                           className="btn-sm"
                           onClick={() => {
@@ -387,14 +378,14 @@ const BuildOwnPc = () => {
                         >
                           <FaTrash />
                         </Button>
-                      </NewTableCell>
+                      </TableCell>
                     </>
                   ) : (
                     <>
-                      <NewTableCell colSpan={4}>
+                      <TableCell colSpan={4}>
                         Add a Solid State Drive/SSD
-                      </NewTableCell>
-                      <NewTableCell className="build-pc-cell-data">
+                      </TableCell>
+                      <TableCell className="build-pc-cell-data">
                         <Button
                           className="btn-block"
                           size="sm"
@@ -404,29 +395,29 @@ const BuildOwnPc = () => {
                         >
                           Add +
                         </Button>
-                      </NewTableCell>
+                      </TableCell>
                     </>
                   )}
                 </TableRow>
                 <TableRow>
-                  <NewTableCell className="build-pc-cell-data">
+                  <TableCell className="build-pc-cell-data">
                     Hard Disk Drive
-                  </NewTableCell>
+                  </TableCell>
                   {hdd.name ? (
                     <>
-                      <NewTableCell className="build-pc-cell-data">
+                      <TableCell className="build-pc-cell-data">
                         {hdd?.name}
-                      </NewTableCell>
-                      <NewTableCell className="build-pc-cell-data">
+                      </TableCell>
+                      <TableCell className="build-pc-cell-data">
                         {hdd?.modelNumber}
-                      </NewTableCell>
-                      <NewTableCell className="build-pc-cell-data">
+                      </TableCell>
+                      <TableCell className="build-pc-cell-data">
                         ₹{hdd?.price}
-                      </NewTableCell>
-                      <NewTableCell className="build-pc-cell-data">
+                      </TableCell>
+                      <TableCell className="build-pc-cell-data">
                         {hdd?.qty}
-                      </NewTableCell>
-                      <NewTableCell className="build-pc-cell-data">
+                      </TableCell>
+                      <TableCell className="build-pc-cell-data">
                         <Button
                           className="btn-sm"
                           onClick={() => {
@@ -441,14 +432,14 @@ const BuildOwnPc = () => {
                         >
                           <FaTrash />
                         </Button>
-                      </NewTableCell>
+                      </TableCell>
                     </>
                   ) : (
                     <>
-                      <NewTableCell colSpan={4}>
+                      <TableCell colSpan={4}>
                         Add a Hard Disk Drive/HDD
-                      </NewTableCell>
-                      <NewTableCell className="build-pc-cell-data">
+                      </TableCell>
+                      <TableCell className="build-pc-cell-data">
                         <Button
                           className="btn-block"
                           size="sm"
@@ -458,29 +449,29 @@ const BuildOwnPc = () => {
                         >
                           Add +
                         </Button>
-                      </NewTableCell>
+                      </TableCell>
                     </>
                   )}
                 </TableRow>
                 <TableRow>
-                  <NewTableCell className="build-pc-cell-data">
+                  <TableCell className="build-pc-cell-data">
                     Graphics Card
-                  </NewTableCell>
+                  </TableCell>
                   {gpu.name ? (
                     <>
-                      <NewTableCell className="build-pc-cell-data">
+                      <TableCell className="build-pc-cell-data">
                         {gpu?.name}
-                      </NewTableCell>
-                      <NewTableCell className="build-pc-cell-data">
+                      </TableCell>
+                      <TableCell className="build-pc-cell-data">
                         {gpu?.modelNumber}
-                      </NewTableCell>
-                      <NewTableCell className="build-pc-cell-data">
+                      </TableCell>
+                      <TableCell className="build-pc-cell-data">
                         ₹{gpu?.price}
-                      </NewTableCell>
-                      <NewTableCell className="build-pc-cell-data">
+                      </TableCell>
+                      <TableCell className="build-pc-cell-data">
                         {gpu?.qty}
-                      </NewTableCell>
-                      <NewTableCell className="build-pc-cell-data">
+                      </TableCell>
+                      <TableCell className="build-pc-cell-data">
                         <Button
                           className="btn-sm"
                           onClick={() => {
@@ -495,14 +486,12 @@ const BuildOwnPc = () => {
                         >
                           <FaTrash />
                         </Button>
-                      </NewTableCell>
+                      </TableCell>
                     </>
                   ) : (
                     <>
-                      <NewTableCell colSpan={4}>
-                        Add a Graphics Card
-                      </NewTableCell>
-                      <NewTableCell className="build-pc-cell-data">
+                      <TableCell colSpan={4}>Add a Graphics Card</TableCell>
+                      <TableCell className="build-pc-cell-data">
                         <Button
                           className="btn-block"
                           size="sm"
@@ -512,29 +501,29 @@ const BuildOwnPc = () => {
                         >
                           Add +
                         </Button>
-                      </NewTableCell>
+                      </TableCell>
                     </>
                   )}
                 </TableRow>
                 <TableRow>
-                  <NewTableCell className="build-pc-cell-data">
+                  <TableCell className="build-pc-cell-data">
                     Power Supply Unit
-                  </NewTableCell>
+                  </TableCell>
                   {psu.name ? (
                     <>
-                      <NewTableCell className="build-pc-cell-data">
+                      <TableCell className="build-pc-cell-data">
                         {psu?.name}
-                      </NewTableCell>
-                      <NewTableCell className="build-pc-cell-data">
+                      </TableCell>
+                      <TableCell className="build-pc-cell-data">
                         {psu?.modelNumber}
-                      </NewTableCell>
-                      <NewTableCell className="build-pc-cell-data">
+                      </TableCell>
+                      <TableCell className="build-pc-cell-data">
                         ₹{psu?.price}
-                      </NewTableCell>
-                      <NewTableCell className="build-pc-cell-data">
+                      </TableCell>
+                      <TableCell className="build-pc-cell-data">
                         {psu?.qty}
-                      </NewTableCell>
-                      <NewTableCell className="build-pc-cell-data">
+                      </TableCell>
+                      <TableCell className="build-pc-cell-data">
                         <Button
                           className="btn-sm"
                           onClick={() => {
@@ -549,14 +538,14 @@ const BuildOwnPc = () => {
                         >
                           <FaTrash />
                         </Button>
-                      </NewTableCell>
+                      </TableCell>
                     </>
                   ) : (
                     <>
-                      <NewTableCell colSpan={4}>
+                      <TableCell colSpan={4}>
                         Add a Power Supply Unit/PSU/SMPS
-                      </NewTableCell>
-                      <NewTableCell className="build-pc-cell-data">
+                      </TableCell>
+                      <TableCell className="build-pc-cell-data">
                         <Button
                           className="btn-block"
                           size="sm"
@@ -566,29 +555,27 @@ const BuildOwnPc = () => {
                         >
                           Add +
                         </Button>
-                      </NewTableCell>
+                      </TableCell>
                     </>
                   )}
                 </TableRow>
                 <TableRow>
-                  <NewTableCell className="build-pc-cell-data">
-                    Cabinet
-                  </NewTableCell>
+                  <TableCell className="build-pc-cell-data">Cabinet</TableCell>
                   {cabinet.name ? (
                     <>
-                      <NewTableCell className="build-pc-cell-data">
+                      <TableCell className="build-pc-cell-data">
                         {cabinet?.name}
-                      </NewTableCell>
-                      <NewTableCell className="build-pc-cell-data">
+                      </TableCell>
+                      <TableCell className="build-pc-cell-data">
                         {cabinet?.modelNumber}
-                      </NewTableCell>
-                      <NewTableCell className="build-pc-cell-data">
+                      </TableCell>
+                      <TableCell className="build-pc-cell-data">
                         ₹{cabinet?.price}
-                      </NewTableCell>
-                      <NewTableCell className="build-pc-cell-data">
+                      </TableCell>
+                      <TableCell className="build-pc-cell-data">
                         {cabinet?.qty}
-                      </NewTableCell>
-                      <NewTableCell className="build-pc-cell-data">
+                      </TableCell>
+                      <TableCell className="build-pc-cell-data">
                         <Button
                           className="btn-sm"
                           onClick={() => {
@@ -603,12 +590,12 @@ const BuildOwnPc = () => {
                         >
                           <FaTrash />
                         </Button>
-                      </NewTableCell>
+                      </TableCell>
                     </>
                   ) : (
                     <>
-                      <NewTableCell colSpan={4}>Add a Cabinet</NewTableCell>
-                      <NewTableCell className="build-pc-cell-data">
+                      <TableCell colSpan={4}>Add a Cabinet</TableCell>
+                      <TableCell className="build-pc-cell-data">
                         <Button
                           className="btn-block"
                           size="sm"
@@ -618,29 +605,27 @@ const BuildOwnPc = () => {
                         >
                           Add +
                         </Button>
-                      </NewTableCell>
+                      </TableCell>
                     </>
                   )}
                 </TableRow>
                 <TableRow>
-                  <NewTableCell className="build-pc-cell-data">
-                    Monitor
-                  </NewTableCell>
+                  <TableCell className="build-pc-cell-data">Monitor</TableCell>
                   {monitor.name ? (
                     <>
-                      <NewTableCell className="build-pc-cell-data">
+                      <TableCell className="build-pc-cell-data">
                         {monitor?.name}
-                      </NewTableCell>
-                      <NewTableCell className="build-pc-cell-data">
+                      </TableCell>
+                      <TableCell className="build-pc-cell-data">
                         {monitor?.modelNumber}
-                      </NewTableCell>
-                      <NewTableCell className="build-pc-cell-data">
+                      </TableCell>
+                      <TableCell className="build-pc-cell-data">
                         ₹{monitor?.price}
-                      </NewTableCell>
-                      <NewTableCell className="build-pc-cell-data">
+                      </TableCell>
+                      <TableCell className="build-pc-cell-data">
                         {monitor?.qty}
-                      </NewTableCell>
-                      <NewTableCell className="build-pc-cell-data">
+                      </TableCell>
+                      <TableCell className="build-pc-cell-data">
                         <Button
                           className="btn-sm"
                           onClick={() => {
@@ -655,12 +640,12 @@ const BuildOwnPc = () => {
                         >
                           <FaTrash />
                         </Button>
-                      </NewTableCell>
+                      </TableCell>
                     </>
                   ) : (
                     <>
-                      <NewTableCell colSpan={4}>Add a Monitor</NewTableCell>
-                      <NewTableCell className="build-pc-cell-data">
+                      <TableCell colSpan={4}>Add a Monitor</TableCell>
+                      <TableCell className="build-pc-cell-data">
                         <Button
                           className="btn-block"
                           size="sm"
@@ -670,29 +655,27 @@ const BuildOwnPc = () => {
                         >
                           Add +
                         </Button>
-                      </NewTableCell>
+                      </TableCell>
                     </>
                   )}
                 </TableRow>
                 <TableRow>
-                  <NewTableCell className="build-pc-cell-data">
-                    Mouse
-                  </NewTableCell>
+                  <TableCell className="build-pc-cell-data">Mouse</TableCell>
                   {mouse.name ? (
                     <>
-                      <NewTableCell className="build-pc-cell-data">
+                      <TableCell className="build-pc-cell-data">
                         {mouse?.name}
-                      </NewTableCell>
-                      <NewTableCell className="build-pc-cell-data">
+                      </TableCell>
+                      <TableCell className="build-pc-cell-data">
                         {mouse?.modelNumber}
-                      </NewTableCell>
-                      <NewTableCell className="build-pc-cell-data">
+                      </TableCell>
+                      <TableCell className="build-pc-cell-data">
                         ₹{mouse?.price}
-                      </NewTableCell>
-                      <NewTableCell className="build-pc-cell-data">
+                      </TableCell>
+                      <TableCell className="build-pc-cell-data">
                         {mouse?.qty}
-                      </NewTableCell>
-                      <NewTableCell className="build-pc-cell-data">
+                      </TableCell>
+                      <TableCell className="build-pc-cell-data">
                         <Button
                           className="btn-sm"
                           onClick={() => {
@@ -707,12 +690,12 @@ const BuildOwnPc = () => {
                         >
                           <FaTrash />
                         </Button>
-                      </NewTableCell>
+                      </TableCell>
                     </>
                   ) : (
                     <>
-                      <NewTableCell colSpan={4}>Add a Mouse</NewTableCell>
-                      <NewTableCell className="build-pc-cell-data">
+                      <TableCell colSpan={4}>Add a Mouse</TableCell>
+                      <TableCell className="build-pc-cell-data">
                         <Button
                           className="btn-block"
                           size="sm"
@@ -722,29 +705,27 @@ const BuildOwnPc = () => {
                         >
                           Add +
                         </Button>
-                      </NewTableCell>
+                      </TableCell>
                     </>
                   )}
                 </TableRow>
                 <TableRow>
-                  <NewTableCell className="build-pc-cell-data">
-                    Keyboard
-                  </NewTableCell>
+                  <TableCell className="build-pc-cell-data">Keyboard</TableCell>
                   {keyboard.name ? (
                     <>
-                      <NewTableCell className="build-pc-cell-data">
+                      <TableCell className="build-pc-cell-data">
                         {keyboard?.name}
-                      </NewTableCell>
-                      <NewTableCell className="build-pc-cell-data">
+                      </TableCell>
+                      <TableCell className="build-pc-cell-data">
                         {keyboard?.modelNumber}
-                      </NewTableCell>
-                      <NewTableCell className="build-pc-cell-data">
+                      </TableCell>
+                      <TableCell className="build-pc-cell-data">
                         ₹{keyboard?.price}
-                      </NewTableCell>
-                      <NewTableCell className="build-pc-cell-data">
+                      </TableCell>
+                      <TableCell className="build-pc-cell-data">
                         {keyboard?.qty}
-                      </NewTableCell>
-                      <NewTableCell className="build-pc-cell-data">
+                      </TableCell>
+                      <TableCell className="build-pc-cell-data">
                         <Button
                           className="btn-sm"
                           onClick={() => {
@@ -759,12 +740,12 @@ const BuildOwnPc = () => {
                         >
                           <FaTrash />
                         </Button>
-                      </NewTableCell>
+                      </TableCell>
                     </>
                   ) : (
                     <>
-                      <NewTableCell colSpan={4}>Add a Keyboard</NewTableCell>
-                      <NewTableCell className="build-pc-cell-data">
+                      <TableCell colSpan={4}>Add a Keyboard</TableCell>
+                      <TableCell className="build-pc-cell-data">
                         <Button
                           className="btn-block"
                           size="sm"
@@ -774,29 +755,27 @@ const BuildOwnPc = () => {
                         >
                           Add +
                         </Button>
-                      </NewTableCell>
+                      </TableCell>
                     </>
                   )}
                 </TableRow>
                 <TableRow>
-                  <NewTableCell className="build-pc-cell-data">
-                    Mousepad
-                  </NewTableCell>
+                  <TableCell className="build-pc-cell-data">Mousepad</TableCell>
                   {mousepad.name ? (
                     <>
-                      <NewTableCell className="build-pc-cell-data">
+                      <TableCell className="build-pc-cell-data">
                         {mousepad?.name}
-                      </NewTableCell>
-                      <NewTableCell className="build-pc-cell-data">
+                      </TableCell>
+                      <TableCell className="build-pc-cell-data">
                         {mousepad?.modelNumber}
-                      </NewTableCell>
-                      <NewTableCell className="build-pc-cell-data">
+                      </TableCell>
+                      <TableCell className="build-pc-cell-data">
                         ₹{mousepad?.price}
-                      </NewTableCell>
-                      <NewTableCell className="build-pc-cell-data">
+                      </TableCell>
+                      <TableCell className="build-pc-cell-data">
                         {mousepad?.qty}
-                      </NewTableCell>
-                      <NewTableCell className="build-pc-cell-data">
+                      </TableCell>
+                      <TableCell className="build-pc-cell-data">
                         <Button
                           className="btn-sm"
                           onClick={() => {
@@ -811,12 +790,12 @@ const BuildOwnPc = () => {
                         >
                           <FaTrash />
                         </Button>
-                      </NewTableCell>
+                      </TableCell>
                     </>
                   ) : (
                     <>
-                      <NewTableCell colSpan={4}>Add a Mousepad</NewTableCell>
-                      <NewTableCell className="build-pc-cell-data">
+                      <TableCell colSpan={4}>Add a Mousepad</TableCell>
+                      <TableCell className="build-pc-cell-data">
                         <Button
                           className="btn-block"
                           size="sm"
@@ -826,29 +805,29 @@ const BuildOwnPc = () => {
                         >
                           Add +
                         </Button>
-                      </NewTableCell>
+                      </TableCell>
                     </>
                   )}
                 </TableRow>
                 <TableRow>
-                  <NewTableCell className="build-pc-cell-data">
+                  <TableCell className="build-pc-cell-data">
                     Headphone/Headset
-                  </NewTableCell>
+                  </TableCell>
                   {headphone.name ? (
                     <>
-                      <NewTableCell className="build-pc-cell-data">
+                      <TableCell className="build-pc-cell-data">
                         {headphone?.name}
-                      </NewTableCell>
-                      <NewTableCell className="build-pc-cell-data">
+                      </TableCell>
+                      <TableCell className="build-pc-cell-data">
                         {headphone?.modelNumber}
-                      </NewTableCell>
-                      <NewTableCell className="build-pc-cell-data">
+                      </TableCell>
+                      <TableCell className="build-pc-cell-data">
                         ₹{headphone?.price}
-                      </NewTableCell>
-                      <NewTableCell className="build-pc-cell-data">
+                      </TableCell>
+                      <TableCell className="build-pc-cell-data">
                         {headphone?.qty}
-                      </NewTableCell>
-                      <NewTableCell className="build-pc-cell-data">
+                      </TableCell>
+                      <TableCell className="build-pc-cell-data">
                         <Button
                           className="btn-sm"
                           onClick={() => {
@@ -863,14 +842,12 @@ const BuildOwnPc = () => {
                         >
                           <FaTrash />
                         </Button>
-                      </NewTableCell>
+                      </TableCell>
                     </>
                   ) : (
                     <>
-                      <NewTableCell colSpan={4}>
-                        Add a Headphone/Headset
-                      </NewTableCell>
-                      <NewTableCell className="build-pc-cell-data">
+                      <TableCell colSpan={4}>Add a Headphone/Headset</TableCell>
+                      <TableCell className="build-pc-cell-data">
                         <Button
                           className="btn-block"
                           size="sm"
@@ -880,7 +857,7 @@ const BuildOwnPc = () => {
                         >
                           Add +
                         </Button>
-                      </NewTableCell>
+                      </TableCell>
                     </>
                   )}
                 </TableRow>
