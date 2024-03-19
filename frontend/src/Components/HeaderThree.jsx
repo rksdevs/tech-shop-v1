@@ -101,27 +101,27 @@ const HeaderThree = () => {
               {/* <Link to="/">Home</Link>
               <Link to="/buildmypc">Build Your PC</Link>
               <Link to="/">Contact Us</Link> */}
-              <Button
+              {/* <Button
                 variant="outlined"
                 size="small"
                 onClick={() => handleClickNavigation("/")}
               >
                 Home
-              </Button>
-              <Button
+              </Button> */}
+              {/* <Button
                 variant="outlined"
                 size="small"
                 onClick={() => handleClickNavigation("/buildmypc")}
               >
                 Build My PC
-              </Button>
-              <Button
+              </Button> */}
+              {/* <Button
                 variant="outlined"
                 size="small"
                 onClick={() => handleClickNavigation("/")}
               >
                 Contact us
-              </Button>
+              </Button> */}
             </Col>
             <Col className="header-offer">
               <div>

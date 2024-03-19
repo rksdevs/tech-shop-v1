@@ -68,7 +68,7 @@ const ProductScreen = () => {
           {error?.data?.message || error?.error}
         </Message>
       ) : (
-        <>
+        <div className="product-screen-container">
           <Row>
             <Col md={5}>
               <Image src={product.image} alt={product.name} fluid />
@@ -213,7 +213,7 @@ const ProductScreen = () => {
               </ListGroup>
             </Col>
           </Row>
-        </>
+        </div>
       )}
     </>
   );

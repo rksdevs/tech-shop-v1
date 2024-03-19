@@ -188,3 +188,36 @@ table th {
 .page-heading {
   color: #000 important!;
 }
+
+.product-screen-container  {
+  color: #000 !important;
+  p {
+    color: #000 !important;
+  }
+
+  h1 {
+    color: #000 !important;
+  }
+
+  h2 {
+    color: #000 !important;
+  }
+
+  a {
+    color: #000 !important;
+  }
+}
+
+
+
+footer {
+  p {
+    margin-bottom: 0;
+  }
+
+  a {
+    text-decoration: none;
+    color: #F4BF96;
+  }
+}
+

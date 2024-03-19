@@ -20,7 +20,7 @@
             .header-brand-span {
                 font-size: 0.25em;
                 margin-left: .5em;
-                color: #583e65;
+                color: #CE5A67;
             }
         }
 
@@ -42,6 +42,7 @@
             justify-content: flex-end;
             padding-right: 0;
             color: #000;
+            gap: 1em;
 
             a {
                 position: relative;
@@ -62,7 +63,22 @@
                 left: 10px;
                 top: 0px;
                 font-size: 9px;
-                background-color: #583e65 !important;
+                background-color: #CE5A67 !important;
+            }
+
+            .build-pc-btn {
+                background-color: #CE5A67 !important;
+                color: #fff;
+                border-color: #CE5A67;
+                padding: 0.5em 0.4em 0.3em;
+            }
+
+            .build-pc-badge {
+                margin-left: 5px;
+                position: absolute;
+                left: 69px;
+                top: -10px;
+                background-color: #1F1717 !important;
             }
         }
     }

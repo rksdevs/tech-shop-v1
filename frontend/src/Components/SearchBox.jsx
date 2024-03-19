@@ -30,6 +30,19 @@ const SearchBox = () => {
         label="Search"
         id="outlined-size-small"
         size="small"
+        InputLabelProps={{
+          sx: {
+            "&.Mui-focused": {
+              color: "#CE5A67", // Change 'your_focus_label_color_here' to your desired focus label color
+            },
+          },
+        }}
+        sx={{
+          "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
+            {
+              borderColor: "#CE5A67", // Change 'your_focus_color_here' to your desired focus color
+            },
+        }}
       ></TextField>
       <Button
         type="submit"

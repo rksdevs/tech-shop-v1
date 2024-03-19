@@ -23,6 +23,7 @@ import { useLogoutMutation } from "../slices/usersApiSlice";
 import { logout } from "../slices/authSlice";
 import SearchBox from "./SearchBox";
 import ShoppingBagOutlinedIcon from "@mui/icons-material/ShoppingBagOutlined";
+import Button from "@mui/material/Button";
 
 const HeaderMiddle = () => {
   const { cartItems } = useSelector((state) => state.cart);
@@ -32,6 +33,9 @@ const HeaderMiddle = () => {
   const navigate = useNavigate();
 
   const [logoutApiCall] = useLogoutMutation();
+  const handleClickNavigation = (path) => {
+    navigate(`${path}`);
+  };
 
   const logoutHandler = async (e) => {
     e.preventDefault();
@@ -67,6 +71,15 @@ const HeaderMiddle = () => {
               <SearchBox />
             </Col>
             <Col className="header-cart">
+              <Button
+                className="build-pc-btn"
+                variant="outlined"
+                size="small"
+                onClick={() => handleClickNavigation("/buildmypc")}
+              >
+                Build My PC
+                <Badge className="build-pc-badge">New</Badge>
+              </Button>
               <LinkContainer to="/cart">
                 <Nav.Link>
                   <ShoppingBagOutlinedIcon className="header-cart-icon" />{" "}

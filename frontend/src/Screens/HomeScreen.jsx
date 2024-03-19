@@ -32,7 +32,7 @@ const HomeScreen = () => {
         </Message>
       ) : (
         <div className="products-home">
-          <h1 className="page-heading">Latest Products</h1>
+          <h1 className="page-heading">Products</h1>
           <Row>
             {!data.products.length > 0 && <Message>No Products Found</Message>}
             {data.products.map((product) => (
