@@ -1,5 +1,7 @@
 **E-Commerce Website Specialy Tailored For Computer Needs**
 
+**Site is live on Render** -- https://tech-shop-zqrl.onrender.com/
+
 **Stack & Library Details**
 
 *Stack* - 
