@@ -21,6 +21,7 @@ const ProductEditScreen = () => {
   const [modelNumber, setModelNumber] = useState("");
   const [countInStock, setCountInStock] = useState(0);
   const [description, setDescription] = useState("");
+  const [productDiscount, setProductDiscount] = useState(0);
 
   const {
     data: product,
@@ -47,6 +48,7 @@ const ProductEditScreen = () => {
       setImage(product.image);
       setCountInStock(product.countInStock);
       setDescription(product.description);
+      setProductDiscount(product.productDiscount);
     }
   }, [product]);
 
@@ -63,6 +65,7 @@ const ProductEditScreen = () => {
         modelNumber,
         description,
         countInStock,
+        productDiscount,
       }).unwrap(); // NOTE: here we need to unwrap the Promise to catch any rejection in our catch block
       toast.success("Product updated");
       refetch();
@@ -191,6 +194,17 @@ const ProductEditScreen = () => {
                 value={description}
                 onChange={(e) => {
                   setDescription(e.target.value);
+                }}
+              ></Form.Control>
+            </Form.Group>
+            <Form.Group controlId="productDiscount" className="my-2">
+              <Form.Label>Product Discount</Form.Label>
+              <Form.Control
+                type="number"
+                placeholder="Enter Discount In %"
+                value={productDiscount}
+                onChange={(e) => {
+                  setProductDiscount(e.target.value);
                 }}
               ></Form.Control>
             </Form.Group>

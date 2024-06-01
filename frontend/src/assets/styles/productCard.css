@@ -4,5 +4,17 @@
 
     .p-name {
         color: #000;
+        /* text-wrap: wrap;
+        white-space: pre-wrap;
+        text-align: center; */
     }
+    
+    a {
+        text-decoration: none;
+    }
+    /* .product-title {
+         text-wrap: wrap;
+        white-space: pre-wrap;
+        text-align: center;
+    } */
   }

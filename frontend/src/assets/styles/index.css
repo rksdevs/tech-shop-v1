@@ -28,10 +28,38 @@ h1 {
 }
 
 .product-title {
-  height: 2.5em; /* Set a fixed height */
-  overflow: hidden; /* Hide overflow content */
+  height: 3em; /* Set a fixed height */
+  /* overflow: hidden; Hide overflow content */
   text-overflow: ellipsis; /* Add ellipsis for long text */
-  white-space: nowrap; /* Prevent wrapping */
+  white-space: pre-wrap; /* Prevent wrapping */
+  text-align: center;
+  text-wrap: wrap;
+}
+
+.product-discount {
+  color: #CE5A67;
+  font-weight: 400;
+}
+/* 
+.product-price-after-discount {
+  font-weight: 400;
+} */
+
+.product-price {
+  font-size: 1rem;
+  color: #5a5858;
+  text-decoration: line-through;
+}
+
+.card-text-price {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+  /* justify-content: space-between; */
+}
+
+.offer-category {
+  background-color: #CE5A67;
 }
 
 table td,

@@ -23,7 +23,19 @@ const Product = ({ product }) => {
           text={`${product.numReviews} reviews`}
         />
       </Card.Text>
-      <Card.Text as="h3">₹{product.price}</Card.Text>
+      <Card.Text as="h3" className="card-text-price">
+        {product.productDiscount ? (
+          <>
+            <span className="product-discount">{product.productDiscount}%</span>
+            <span className="product-price-after-discount">
+              ₹{product.priceAfterDiscount}
+            </span>
+            <span className="product-price">₹{product.price}</span>
+          </>
+        ) : (
+          <> ₹{product.price}</>
+        )}
+      </Card.Text>
     </Card>
   );
 };

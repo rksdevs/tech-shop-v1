@@ -4,7 +4,7 @@ import { Container, Row, Col } from "react-bootstrap";
 const Footer = () => {
   const currentYear = new Date().getFullYear();
   return (
-    <footer>
+    <footer style={{ backgroundColor: "#1F1717", color: "#fff" }}>
       <Container>
         <Row style={{ backgroundColor: "#1F1717", color: "#fff", margin: 0 }}>
           <Col

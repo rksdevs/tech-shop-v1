@@ -48,7 +48,9 @@ const createProduct = asyncHandler(async(req,res)=>{
         image: '/images/sample.jpg',
         countInStock: 0,
         numReviews: 0,
-        description: 'Sample Description'
+        description: 'Sample Description',
+        productDiscount: 0,
+        priceAfterDiscount: 0
     });
 
     const createdProduct = await newProduct.save();
@@ -59,7 +61,7 @@ const createProduct = asyncHandler(async(req,res)=>{
 //@route  PUT /api/products/:id
 //@access Private/Admin
 const updateProduct = asyncHandler(async(req,res)=>{
-    const {name, price, brand, category, modelNumber, image, countInStock, description} = req.body;
+    const {name, price, brand, category, modelNumber, image, countInStock, description, productDiscount} = req.body;
 
     const product = await Product.findById(req.params.id);
 
@@ -72,6 +74,9 @@ const updateProduct = asyncHandler(async(req,res)=>{
         product.image = image;
         product.countInStock = countInStock;
         product.description = description;
+        product.productDiscount = productDiscount;
+
+        product.priceAfterDiscount = product.price - (product.price* product.productDiscount/100)
 
         const updatedProduct = await product.save();
         res.json(updatedProduct);
@@ -184,4 +189,30 @@ const getTopRatedProducts = asyncHandler(async(req,res)=>{
 
 })
 
-export {getAllProducts, getProductById, createProduct, updateProduct, deleteProduct, getProductsByCategory, updateProductStock, createProductReview, getTopRatedProducts}
+//@desc Fetch top rated products
+//@route GET /api/products/allCategories
+//@access Public
+const getAllCategories = asyncHandler(async(req, res) => {
+    try {
+        const products = (await Product.find());
+        if (products.length > 0) {
+            const categories = products.map((product)=> product.category)
+            const uniqueCategories = [];
+            categories.forEach((category)=> {
+                if (!uniqueCategories.includes(category)) {
+                    uniqueCategories.push(category)
+                }
+            })
+            res.status(200).json(uniqueCategories)
+        } else {
+            res.status(404);
+        throw new Error("Category not found! Here is a pancake..")
+        }
+    } catch (error) {
+        console.log(error);
+        res.status(404);
+        throw new Error("Category not found! Here is a pancake..")
+    }
+})
+
+export {getAllProducts, getProductById, createProduct, updateProduct, deleteProduct, getProductsByCategory, updateProductStock, createProductReview, getTopRatedProducts, getAllCategories}
