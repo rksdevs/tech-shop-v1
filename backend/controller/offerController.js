@@ -1,11 +1,13 @@
 import asyncHandler from "../middlewares/asyncHandler.js";
 import Offer from "../models/offerModel.js";
+import Product from "../models/productModel.js";
 
 const createOffer = asyncHandler(async(req, res)=> {
     const {offerName, offerDiscount, status} = req.body;
 
     try {
         const offer = await Offer.findOne({offerName});
+        
         if(offer) {
             res.status(400);
             throw new Error('Offer already exist, update offer instead')
@@ -76,4 +78,29 @@ const getAllOffers = asyncHandler(async(req,res)=> {
     }
 })
 
-export {createOffer, updateOffer, deleteOffer, getAllOffers};
+const updateProductOffer = asyncHandler(async(req, res)=> {
+    const {offer, productCategory} = req.body;
+    try {
+        //get all the products from the selected Category
+        const getProductsByCategory = await Product.find({category: productCategory});
+        if(getProductsByCategory.length) {
+            //update their productDiscount, isOnOffer, offerName
+            const productsPromise = getProductsByCategory.map(async (productToUpdate)=> {
+                productToUpdate.productDiscount = offer.offerDiscount;
+                productToUpdate.priceAfterDiscount = productToUpdate.price - (productToUpdate.price* productToUpdate.productDiscount/100)
+                productToUpdate.isOnOffer = true;
+                productToUpdate.offerName = offer.offerName;
+                await productToUpdate.save();
+            })
+
+            Promise.all(productsPromise)
+        }
+        
+        res.status(200).json(getProductsByCategory)
+    } catch (error) {
+        console.log(error);
+        throw new Error("Can not updated product offer")
+    }
+})
+
+export {createOffer, updateOffer, deleteOffer, getAllOffers, updateProductOffer};

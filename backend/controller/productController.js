@@ -5,7 +5,7 @@ import Product from "../models/productModel.js";
 //@route GET /api/products
 //@access Public
 const getAllProducts = asyncHandler(async(req,res)=>{
-    const pageSize = process.env.PAGINATION_LIMIT;
+    const pageSize = 30;
     const page = Number(req.query.pageNumber) || 1;
 
     const keyword = req.query.keyword ? {name: {$regex : req.query.keyword, $options: 'i'}} : {};

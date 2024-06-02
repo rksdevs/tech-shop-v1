@@ -80,6 +80,14 @@ const productSchema = new mongoose.Schema({
         type: Number,
         required: true,
         default: 0
+    },
+    isOnOffer: {
+        type: Boolean,
+        required: true,
+        default: false
+    },
+    offerName: {
+        type: String,
     }
 }, {timestamps: true})
 

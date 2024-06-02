@@ -58,8 +58,21 @@ h1 {
   /* justify-content: space-between; */
 }
 
+.main-container-offers {
+  display: flex;
+}
+
+.offer-btn {
+  margin-right: 1em;
+}
+
 .offer-category {
   background-color: #CE5A67;
+}
+
+.create-offer-dropdown-container {
+  display: flex;
+  gap: 2em;
 }
 
 table td,

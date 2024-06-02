@@ -5,3 +5,4 @@ export const ORDERS_URL = '/api/orders';
 export const USERS_URL = '/api/users';
 export const UPLOAD_URL = '/api/upload';
 export const RAZORPAY_URL = '/api/razorpay';
+export const OFFERS_URL = '/api/offers';
