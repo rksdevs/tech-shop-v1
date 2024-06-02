@@ -17,4 +17,12 @@
         white-space: pre-wrap;
         text-align: center;
     } */
+
+    .product-offer-badge {
+        position: absolute;
+          right: 10px;
+          top: 5px;
+          width: 70px;
+          background: #CE5A67 !important;
+      }
   }

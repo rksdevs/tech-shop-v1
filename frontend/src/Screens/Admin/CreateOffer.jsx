@@ -97,19 +97,19 @@ function CreateOffer() {
     }
   };
 
-  const handleOfferSelection = (e, offerName) => {
-    e.preventDefault();
+  // const handleOfferSelection = (e, offerName) => {
+  //   e.preventDefault();
 
-    let currentOffer = allOffers?.filter(
-      (offer) => offer.offerName === offerName
-    );
-    console.log(currentOffer);
-    setOfferToApply({
-      offerName: currentOffer.offerName,
-      offerDiscount: currentOffer.offerDiscount,
-      status: currentOffer.status,
-    });
-  };
+  //   let currentOffer = allOffers?.filter(
+  //     (offer) => offer.offerName === offerName
+  //   );
+  //   console.log(currentOffer);
+  //   setOfferToApply({
+  //     offerName: currentOffer.offerName,
+  //     offerDiscount: currentOffer.offerDiscount,
+  //     status: currentOffer.status,
+  //   });
+  // };
 
   const handleOfferCreation = async (e) => {
     e.preventDefault();
@@ -136,7 +136,6 @@ function CreateOffer() {
   };
 
   const submitHandlerOfferUpdate = async (e) => {
-    console.log(selectedOffer, { offerName, offerDiscount, status });
     e.preventDefault();
     try {
       const res = await updateOffer({
@@ -164,7 +163,6 @@ function CreateOffer() {
 
   const submitHandlerOfferApply = async (e) => {
     e.preventDefault();
-    console.log(offerToApply);
     try {
       if (offerToApply?.status === "Active") {
         const res = await applyOffer({
@@ -198,7 +196,6 @@ function CreateOffer() {
       setOfferName(selectedOffer?.offerName);
       setOfferDiscount(selectedOffer?.offerDiscount);
       setStatus(selectedOffer?.status);
-      // console.log(selectedOffer);
     }
   }, [selectedOffer, setSelectedOffer]);
 

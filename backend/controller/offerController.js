@@ -40,6 +40,19 @@ const updateOffer = asyncHandler(async(req, res)=> {
             offer.status = status;
 
             const updatedOffer = await offer.save();
+            if(status === "Inactive") {
+                const productsToUpdate = await Product.find({offerName:offer.offerName})
+                if(productsToUpdate.length) {
+                    let productPromise = productsToUpdate.map(async(product)=> {
+                        product.isOnOffer = false;
+                        product.productDiscount = 0;
+                        product.priceAfterDiscount = product.price;
+                        await product.save();
+                    })
+
+                    Promise.all(productPromise);
+                }
+            }
             res.status(200).json(updatedOffer)
         }
     } catch (error) {
@@ -102,5 +115,35 @@ const updateProductOffer = asyncHandler(async(req, res)=> {
         throw new Error("Can not updated product offer")
     }
 })
+
+// const cancelOffer = asyncHandler(async(req, res)=> {
+//     const offerId = req.params.id;
+//     try {
+//         const offer = await Offer.findById(offerId);
+//         if (offer) {
+//             offer.status = "Inactive";
+//             const updatedOffer = await offer.save();
+//             const productsToUpdate = await Product.find({offerName:offer.offerName})
+//             if(productsToUpdate.length) {
+//                 let productPromise = productsToUpdate.map(async(product)=> {
+//                     product.isOnOffer = false;
+//                     product.productDiscount = 0;
+//                     product.priceAfterDiscount = product.price;
+//                     await product.save();
+//                 })
+
+//                 Promise.all(productPromise);
+//             }
+//             res.status(200).json({products: productsToUpdate, offer: updateOffer});
+//         } else {
+//             res.status(404)
+//             throw new Error('Offer doesnt exists')
+//         }
+//     } catch (error) {
+//         console.log(error);
+//         res.status(400)
+//             throw new Error('Can not cancel offer try again')
+//     }
+// })
 
 export {createOffer, updateOffer, deleteOffer, getAllOffers, updateProductOffer};

@@ -7,9 +7,11 @@ router.get("/allOffers", protect, admin, getAllOffers);
 
 router.post("/createOffer",protect, admin, createOffer);
 
-router.post("/applyOffer", protect, admin, updateProductOffer)
+router.post("/applyOffer", protect, admin, updateProductOffer);
 
 router.put("/updateOffer/:id",protect, admin, updateOffer);
+
+// router.post("/cancelOffer/offer/:id", protect, admin, cancelOffer);
 
 router.delete("/:id",protect, admin, deleteOffer);
 
