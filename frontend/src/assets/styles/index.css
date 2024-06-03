@@ -129,6 +129,30 @@ table th {
   height: 260px !important;
 }
 
+.order-info-card-container {
+  display: flex;
+  gap: 0.5em;
+}
+
+.order-info-card-heading {
+  padding-bottom: 0.5em !important;
+  p {
+    font-weight: 500;
+  }
+}
+
+.refund-order-item {
+  padding: 0.5em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.order-info-card-details {
+  color:#000;
+  font-weight: 500;
+}
+
 .product-carousel {
   background: #F4BF96 !important;
 

@@ -134,5 +134,24 @@ const getAllOrders = asyncHandler(async(req,res)=>{
     res.status(200).json(orders); 
 })
 
+const updateOrderToShipped = asyncHandler(async(req,res)=>{
+    const {courierService, trackingNumber} = req.body;
+    const order = await Order.findById(req.params.id);
 
-export {addOrderItems, getMyOrders, getOrderById, updateOrderToPaid, updateOrderToDelivered, getAllOrders}
+    if (order) {
+        order.isShipped = true;
+        order.shippedAt = Date.now();
+        order.trackingDetails.courierService = courierService;
+        order.trackingDetails.trackingNumber = trackingNumber;
+
+        const updatedOrder = await order.save();
+
+        res.status(200).json(updatedOrder);
+    } else {
+        res.status(404);
+        throw new Error('Order not found!')
+    }
+})
+
+
+export {addOrderItems, getMyOrders, getOrderById, updateOrderToPaid, updateOrderToDelivered, getAllOrders, updateOrderToShipped}

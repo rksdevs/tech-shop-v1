@@ -93,6 +93,22 @@ const orderSchema = new mongoose.Schema ({
     },
     deliveredAt: {
         type: Date
+    },
+    isShipped: {
+        type: Boolean,
+        required: true,
+        default: false,
+    },
+    shippedAt: {
+        type: Date
+    },
+    trackingDetails: {
+        courierService: {
+            type: String
+        },
+        trackingNumber: {
+            type: String
+        }
     }
 }, {timestamps: true})
 

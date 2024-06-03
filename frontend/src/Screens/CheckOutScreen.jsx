@@ -1,7 +1,15 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 // import { PayPalButtons, usePayPalScriptReducer } from "@paypal/react-paypal-js";
-import { Row, Col, ListGroup, Image, Button, Card } from "react-bootstrap";
+import {
+  Row,
+  Col,
+  ListGroup,
+  Image,
+  Button,
+  Card,
+  Form,
+} from "react-bootstrap";
 import { useSelector } from "react-redux";
 import Message from "../Components/Message";
 import logo from "../assets/logo.png";
@@ -11,11 +19,14 @@ import {
   useDeliverOrderMutation,
   useInitiateRazorpayPaymentMutation,
   useGetRazorpayKeyQuery,
+  useShipOrderMutation,
 } from "../slices/orderApiSlice";
 import Loader from "../Components/Loader";
 import { toast } from "react-toastify";
 
 const CheckOutScreen = () => {
+  const [courierService, setCourierService] = useState("");
+  const [trackingNumber, setTrackingNumber] = useState("");
   const { id: orderId } = useParams();
   const {
     data: order,
@@ -51,6 +62,8 @@ const CheckOutScreen = () => {
   const [deliverOrder, { isLoading: loadingDeliver }] =
     useDeliverOrderMutation();
 
+  const [shipOrder, { isLoading: loadingShipping }] = useShipOrderMutation();
+
   const { userInfo } = useSelector((state) => state.auth);
 
   const handleOrderDeliver = async () => {
@@ -62,6 +75,19 @@ const CheckOutScreen = () => {
       toast.error(error?.data?.message || error?.message);
     }
   };
+
+  const handleOrderShipped = async (e) => {
+    e.preventDefault();
+    try {
+      await shipOrder({ orderId, courierService, trackingNumber });
+      refetch();
+      toast.success("Order Shipped");
+    } catch (error) {
+      toast.error(error?.data?.message || error?.message);
+    }
+  };
+
+  const handleRefund = async (e) => {};
 
   const [
     initiatePayment,
@@ -175,28 +201,103 @@ const CheckOutScreen = () => {
                 <strong>Contact: </strong>
                 {order.shippingAddress.phone}
               </p>
-              <div>
-                {order.isDelivered ? (
-                  <Message variant="success">
-                    Delivered on {order.deliveredAt}
-                  </Message>
-                ) : (
-                  <Message variant="danger">Not yet delivered</Message>
-                )}
-              </div>
-            </ListGroup.Item>
-            <ListGroup.Item>
-              <h2>Payment</h2>
-              <p>
-                <strong>Payment Method: </strong>
-                {order.paymentMethod}
-              </p>
-              <div>
-                {order.isPaid ? (
-                  <Message variant="success">Paid on {order.paidAt}</Message>
-                ) : (
-                  <Message variant="danger">Payment is pending</Message>
-                )}
+              <div className="order-info-card-container">
+                <Card className="order-info-card">
+                  <ListGroup variant="flush">
+                    <ListGroup.Item className="order-info-card-heading">
+                      <p>Shipping Details</p>
+                    </ListGroup.Item>
+                    <ListGroup.Item>
+                      {order.isShipped ? (
+                        <ListGroup>
+                          <ListGroup.Item>
+                            <p>
+                              <span className="order-info-card-details">
+                                Shipped on:{" "}
+                              </span>{" "}
+                              {order.shippedAt.substring(0, 10)}
+                            </p>
+                          </ListGroup.Item>
+                          <ListGroup.Item>
+                            <p>
+                              <span className="order-info-card-details">
+                                Courier Name:{" "}
+                              </span>
+                              {order?.trackingDetails?.courierService}
+                            </p>
+                          </ListGroup.Item>
+                          <ListGroup.Item>
+                            <p>
+                              <span className="order-info-card-details">
+                                Tracking Number:{" "}
+                              </span>
+                              {order?.trackingDetails?.trackingNumber}
+                            </p>
+                          </ListGroup.Item>
+                        </ListGroup>
+                      ) : (
+                        <Message variant="danger">Not yet delivered</Message>
+                      )}
+                    </ListGroup.Item>
+                  </ListGroup>
+                </Card>
+                <Card className="order-info-card">
+                  <ListGroup variant="flush">
+                    <ListGroup.Item className="order-info-card-heading">
+                      <p>Delivery Details</p>
+                    </ListGroup.Item>
+                    <ListGroup.Item>
+                      {order.isDelivered ? (
+                        <ListGroup>
+                          <ListGroup.Item>
+                            <p>
+                              <span className="order-info-card-details">
+                                Delivered on:{" "}
+                              </span>{" "}
+                              {order.deliveredAt.substring(0, 10)}
+                            </p>
+                          </ListGroup.Item>
+                        </ListGroup>
+                      ) : (
+                        <Message variant="danger">Not yet delivered</Message>
+                      )}
+                    </ListGroup.Item>
+                  </ListGroup>
+                </Card>
+                <Card className="order-info-card">
+                  <ListGroup variant="flush">
+                    <ListGroup.Item className="order-info-card-heading">
+                      <p>Payment Details</p>
+                    </ListGroup.Item>
+                    <ListGroup.Item>
+                      <p>
+                        <strong>Payment Method: </strong>
+                        {order.paymentMethod}
+                      </p>
+                      <div>
+                        {order.isPaid ? (
+                          <ListGroup>
+                            <ListGroup.Item>
+                              <p>
+                                <span className="order-info-card-details">
+                                  Paid on:{" "}
+                                </span>{" "}
+                                {order.paidAt.substring(0, 10)}
+                              </p>
+                            </ListGroup.Item>
+                          </ListGroup>
+                        ) : (
+                          <Message variant="danger">Payment is pending</Message>
+                        )}
+                      </div>
+                    </ListGroup.Item>
+                    {userInfo && userInfo.isAdmin && order.isPaid && (
+                      <ListGroup.Item className="refund-order-item">
+                        <Button>Refund Order</Button>
+                      </ListGroup.Item>
+                    )}
+                  </ListGroup>
+                </Card>
               </div>
             </ListGroup.Item>
             <ListGroup.Item>
@@ -254,6 +355,49 @@ const CheckOutScreen = () => {
                   </div>
                 </ListGroup.Item>
               )}
+
+              {loadingShipping && <Loader />}
+              {userInfo &&
+                userInfo.isAdmin &&
+                order.isPaid &&
+                !order.isShipped && (
+                  <ListGroup.Item>
+                    <Form
+                      onSubmit={(e) => handleOrderShipped(e)}
+                      className="shipping-form"
+                    >
+                      <Form.Group controlId="offerName" className="my-2">
+                        <Form.Label>Courier Service</Form.Label>
+                        <Form.Control
+                          type="text"
+                          placeholder="Courier Name"
+                          value={courierService}
+                          onChange={(e) => {
+                            setCourierService(e.target.value);
+                          }}
+                        ></Form.Control>
+                      </Form.Group>
+                      <Form.Group controlId="offerDiscount" className="my-2">
+                        <Form.Label>Tracking Number</Form.Label>
+                        <Form.Control
+                          type="text"
+                          placeholder="Tracking Number"
+                          value={trackingNumber}
+                          onChange={(e) => {
+                            setTrackingNumber(e.target.value);
+                          }}
+                        ></Form.Control>
+                      </Form.Group>
+                      <Button
+                        type="submit"
+                        variant="primary"
+                        className="my-2 offer-btn"
+                      >
+                        Mark as Shipped
+                      </Button>
+                    </Form>
+                  </ListGroup.Item>
+                )}
 
               {loadingDeliver && <Loader />}
               {userInfo &&

@@ -53,8 +53,15 @@ const orderApiSlice = apiSlice.injectEndpoints({
                 url:`${RAZORPAY_URL}/rzp-key` 
             }),
             keepUnusedDataFor: 5
+        }),
+        shipOrder: builder.mutation({
+            query: (data) => ({
+                url: `${ORDERS_URL}/${data.orderId}/shipped`,
+                method: 'PUT',
+                body: {courierService: data.courierService, trackingNumber: data.trackingNumber}
+            })
         })
     })
 })
 
-export const {useCreateOrderMutation, useGetOrderDetailsQuery, usePayOrderMutation, useGetMyOrdersQuery, useGetOrdersQuery, useDeliverOrderMutation, useInitiateRazorpayPaymentMutation, useGetRazorpayKeyQuery} = orderApiSlice;
+export const {useCreateOrderMutation, useGetOrderDetailsQuery, usePayOrderMutation, useGetMyOrdersQuery, useGetOrdersQuery, useDeliverOrderMutation, useInitiateRazorpayPaymentMutation, useGetRazorpayKeyQuery, useShipOrderMutation} = orderApiSlice;
