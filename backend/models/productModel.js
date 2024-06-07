@@ -34,7 +34,7 @@ const productSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    modelNumber: {
+    sku: {
         type: String,
         required: true,
     },
@@ -88,6 +88,21 @@ const productSchema = new mongoose.Schema({
     },
     offerName: {
         type: String,
+    },
+    compatibilityDetails: {
+        socketType: {type:String},
+        powerConsumption: {type:String},
+        chipsetModel: {type:String},
+        formFactor: {type:String},
+        memorySlots: {type:String},
+        expansionSlots: {type:String},
+        storageInterface: {type:String},
+        formFactor: {type:String},
+        ramType: {type:String},
+        ramFormFactor: {type:String},
+        storageInterface: {type:String},
+        wattage: {type:String},
+        networkCardInterfaces: {type:String}
     }
 }, {timestamps: true})
 
